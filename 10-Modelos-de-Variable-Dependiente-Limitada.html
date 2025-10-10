@@ -602,7 +602,7 @@ donde `\(d_i = 1\)` si `\(y_i &gt; 0\)`, y `\(d_i = 0\)` si `\(y_i \leq 0\)`. Es
 Derivadas de la función de log-verosimilitud respecto a los parámetros:
 
 $$ \frac{\partial \ell}{\partial \beta} = \sum_i \left[
-    d_i \cdot \frac{(y_i - X_i&#39;\beta)}{\sigma^2} + (1 - d_i) \cdot \frac{\phi(X_i&#39;\beta/\sigma)}{1 - \Phi(X_i&#39;\beta/\sigma)} \cdot \frac{X_i}{\sigma}
+    d_i \cdot \frac{(y_i - X_i&#39;\beta)X_i}{\sigma^2} - (1 - d_i) \cdot \frac{\phi(X_i&#39;\beta/\sigma)}{1 - \Phi(X_i&#39;\beta/\sigma)} \cdot \frac{X_i}{\sigma}
 \right] = 0 $$
     
 $$ \frac{\partial \ell}{\partial \sigma} = \sum_i \left[
@@ -612,7 +612,6 @@ $$ \frac{\partial \ell}{\partial \sigma} = \sum_i \left[
       
 Estas ecuaciones no tienen una solución analítica cerrada y se utilizan métodos numéricos, como el algoritmo de Newton-Raphson, para encontrar las estimaciones de máxima verosimilitud de  `\(\beta\)`  y  `\(\sigma\)`.
     
-
 ---
 
 layout: false
@@ -1163,7 +1162,6 @@ donde  `\(\rho\)`  es la correlación entre los errores de las dos ecuaciones y 
 - La comparación de los métodos también puede ayudar a clarificar las diferencias entre selección, censura y truncamiento, y a comprender cómo cada uno de estos problemas afecta la estimación de los modelos de regresión.
 
 **Nota:**  Siempre es importante entender los supuestos y limitaciones de cada método para seleccionar el más adecuado en contextos prácticos.
-
 
 ---
 
