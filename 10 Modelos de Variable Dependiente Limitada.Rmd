@@ -246,14 +246,14 @@ ggplot(df, aes(x, dens)) +
 ## Incorporación del supuesto de Normalidad
 
 - En muchos casos, se asume que la variable latente  $y^*$  sigue una distribución normal.
-- Es importante repasar primero las propiedades estadísticas de la distribución normal censurada para comprender cómo afecta al modelo.
+<!-- - Es importante repasar primero las propiedades estadísticas de la distribución normal censurada para comprender cómo afecta al modelo. -->
 - Bajo el supuesto de normalidad, podemos derivar expresiones explícitas para la función de verosimilitud, lo que facilita la estimación e inferencia.
 
 
 ---
 # Censura: Normalidad y Modelo Tobit
 
-## Momentos de la Distribución Normal Censurada
+## Distribución Normal Censurada
 
 Consideremos una variable aleatoria  $z^*$  que sigue una distribución normal con media  $\mu$  y varianza  $\sigma^2$.  
 
@@ -265,20 +265,21 @@ z^*, & \text{si } z^* > L \\
 L, & \text{si } z^* \leq L
 \end{cases}$$
 
----
-# Censura: Normalidad y Modelo Tobit
 
-## Momentos de la Distribución Normal Censurada
+<!-- --- -->
+<!-- # Censura: Normalidad y Modelo Tobit -->
 
-**Momentos:**
+<!-- ## Momentos de la Distribución Normal Censurada -->
 
-- **Media:**  La media de la variable censurada  $z$  está dada por:
-  $$ E(z) = \mu + \sigma \cdot \frac{\phi(\lambda)}{1-\Phi(\lambda)}, $$
-  donde  $\lambda = (L - \mu)/\sigma$.
-  
-- **Varianza:** La varianza de la variable censurada  $z$  es:
-  $$ \text{Var}(z) = \sigma^2 \left[ 1 - \frac{\phi(\lambda) \cdot (\phi(\lambda) - \lambda)}{[1-\Phi(\lambda)]^2} \right], $$
-  donde $\phi(\cdot)$ es la función de densidad normal estándar y $\Phi(\cdot)$ es la acumulada normal estándar.
+<!-- **Momentos:** -->
+
+<!-- - **Media:**  La media de la variable censurada  $z$  está dada por: -->
+<!--   $$ E(z) = \mu + \sigma \cdot \frac{\phi(\lambda)}{1-\Phi(\lambda)}, $$ -->
+<!--   donde  $\lambda = (L - \mu)/\sigma$. -->
+
+<!-- - **Varianza:** La varianza de la variable censurada  $z$  es: -->
+<!--   $$ \text{Var}(z) = \sigma^2 \left[ 1 - \frac{\phi(\lambda) \cdot (\phi(\lambda) - \lambda)}{[1-\Phi(\lambda)]^2} \right], $$ -->
+<!--   donde $\phi(\cdot)$ es la función de densidad normal estándar y $\Phi(\cdot)$ es la acumulada normal estándar. -->
 
 
 ---
@@ -303,9 +304,10 @@ L, & \text{si } z^* \leq L
   \end{cases}$$
 
 ---
-# Censura: Modelo Tobit
+# Censura: Normalidad y Modelo Tobit
+## Modelo Tobit
 
-## Probabilidad de Censura
+### Probabilidad de Censura
 
 La probabilidad de que la variable latente sea menor o igual a cero (y por lo tanto censurada) es:
 
@@ -314,7 +316,6 @@ $$F^*(0) = P(y^* \leq 0) = P(\varepsilon \leq -X'\beta) = \Phi(-X'\beta/\sigma).
 
 ---
 # Censura: Normalidad y Modelo Tobit
-
 ## Modelo Tobit
 
 ### Función de log-verosimilitud
@@ -329,9 +330,11 @@ $$\ell(\beta, \sigma) = \sum_{i=1}^n \left[
 donde $d_i = 1$ si $y_i > 0$, y $d_i = 0$ si $y_i \leq 0$. Es decir, el primer término dentro de la suma corresponde a las observaciones no censuradas, y el segundo término a las observaciones censuradas.
 
 ---
-# Censura: Modelo Tobit
+# Censura: Normalidad y Modelo Tobit
 
-## Condiciones de Primer Orden (CPO) del Modelo Tobit
+## Modelo Tobit
+
+### Condiciones de Primer Orden (CPO) del Modelo Tobit
 
 Derivadas de la función de log-verosimilitud respecto a los parámetros:
 
