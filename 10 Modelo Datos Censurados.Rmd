@@ -368,5 +368,5 @@ Department of Economics
 <span style="color:#f59f18;">¿Preguntas?</span>
 
 ```{r message=FALSE, warning=FALSE, include=FALSE}
-pagedown::chrome_print("09-Datos-Contables.html", output = "09-Datos-Contables.pdf")
+pagedown::chrome_print("10-Modelo-Datos-Censurados.html", output = "10-Modelo-Datos-Censurados.pdf")
 ```
