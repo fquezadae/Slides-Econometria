@@ -575,8 +575,11 @@ L, &amp; \text{si } z^* \leq L
 La probabilidad de que la variable latente sea menor o igual a cero (y por lo tanto censurada) es:
 
 `$$F^*(0) = P(y^* \leq 0) = P(\varepsilon \leq -X&#39;\beta) = \Phi(-X&#39;\beta/\sigma).$$`
+### ¿Por qué aparece la división por σ?
 
+La división por `\(\sigma\)` ocurre porque la **CDF normal estándar `\(\Phi(·)\)`** asume una varianza igual a 1. Por tanto, debemos “escalar” el error para expresarlo en unidades de desviación estándar:
 
+`$$z = \frac{\varepsilon}{\sigma} \sim N(0,1)$$`
 ---
 # Censura: Normalidad y Modelo Tobit
 ## Modelo Tobit
