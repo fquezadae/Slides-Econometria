@@ -31,7 +31,7 @@ citeopt <- list(max.names=3, longnamesfirst = FALSE)
 ```
 
 ```{r use-logo, echo=FALSE}
-xaringanExtra::use_logo("https://fquezadae.github.io/Slides-Econometria/figs/depto_economía blanco.png")
+xaringanExtra::use_logo("https://fquezadae.github.io/Slides-Econometria/figs/depto_economia_blanco.png")
 ```
 
 # Introducción
@@ -433,7 +433,7 @@ class: inverse, center, middle
 
 **Felipe J. Quezada-Escalona**  
 
-<img src="https://fquezadae.github.io/Slides-Econometria/figs/depto_economía blanco.png" width="200">
+<img src="https://fquezadae.github.io/Slides-Econometria/figs/depto_economia_blanco.png" width="200">
 
 
 <span style="color:#f59f18;">¿Preguntas?</span>
