@@ -461,7 +461,6 @@ class: inverse, center, middle
 
 # Método de Heckman en Dos Pasos (Heckit)
 
----
 
 ---
 # Modelo Heckit
@@ -469,15 +468,14 @@ class: inverse, center, middle
 El truncamiento incidental o sesgo de selección surge cuando la observación de la variable dependiente está condicionada a un proceso de selección.  Para modelar este tipo de datos, se utiliza un modelo con dos ecuaciones: una para la selección y otra para el resultado.
 
 
-## Ecuación de Participación:
+---
+# Modelo Heckit
 
-`$$y_i^{1*} = x_{i1}&#39; \beta_1 + \epsilon_{i1}$$`
+**Ecuación de Participación:** `$$y_i^{1*} = x_{i1}&#39; \beta_1 + \epsilon_{i1}$$`
 
 Esta ecuación modela la decisión binaria de participar o no en la muestra.  La variable latente  `\(y_i^{1*}\)`  representa la propensión a participar, y  `\(x_{i1}\)`  son las variables que influyen en esta decisión.
 
-## Ecuación de Outcome:
-
-`$$y_i^{2*} = x_{i2}&#39; \beta_2 + \epsilon_{i2}$$`
+**Ecuación de Outcome:** `$$y_i^{2*} = x_{i2}&#39; \beta_2 + \epsilon_{i2}$$`
 Esta ecuación modela la variable de resultado  `\(y_i^{2*}\)`, que solo se observa si el individuo decide participar  (`\(y_i^{1*} &gt; 0\)`).  Las variables  `\(x_{i2}\)`  son las que influyen en el resultado.
 
 &lt;div class=&quot;example-box&quot;&gt;
