@@ -454,6 +454,8 @@ Para datos truncados por debajo en  `\(L\)`, la función de log-verosimilitud se
 `$$\ell(\theta) = \sum_{i=1}^{n} \left\{ \ln f^*(y_i | x_i; \theta) - \ln \left[1 - F^*(L | x_i; \theta)\right] \right\}$$`
   
 donde `\(f^*(y_i | x_i; \theta)\)` es la densidad condicional de  `\(y_i^*\)`  dado  `\(x_i\)`  con parámetros  `\(\theta\)`. `\(F^*(L | x_i; \theta)\)` es la función de distribución acumulada (FDA) de  `\(y_i^*\)`  evaluada en el umbral  `\(L\)`, condicional en  `\(x_i\)`.
+
+**Pregunta: ¿Que pasa si es truncamiento es por encima?**
     
 ---
 # Truncamiento: Log-Verosimilitud
