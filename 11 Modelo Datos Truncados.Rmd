@@ -431,17 +431,24 @@ class: inverse, center, middle
 
 # ¡Muchas gracias!
 
+<span style="color:#f59f18; font-size:1.3em; font-weight:bold;">¿Preguntas?</span>
+
+<div style="margin-top: 50px;"></div>
+
+
 **Felipe J. Quezada-Escalona**  
 
 <img src="https://fquezadae.github.io/Slides-Econometria/figs/depto_economia_blanco.png" width="250">
 
-
-<span style="color:#f59f18;">¿Preguntas?</span>
-
-<span style="background-color:#f59f18; color:white; padding:8px 16px; border-radius:12px; font-weight:bold;">
-🌐 <a href="https://felipequezada.com" target="_blank" style="color:white; text-decoration:none;">felipequezada.com</a>
-</span>
-
+<a href="https://felipequezada.com" target="_blank" style="
+  font-size:1em;
+  background:linear-gradient(#f59f18);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  text-decoration:none;
+">
+🌐 felipequezada.com
+</a>
 
 ```{r message=FALSE, warning=FALSE, include=FALSE}
 pagedown::chrome_print("11-Modelo-Datos-Truncados.html", output = "11-Modelo-Datos-Truncados.pdf")

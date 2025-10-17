@@ -1,6 +1,6 @@
 ---
 title: "Modelo de Variable Dependiente Limitada"
-subtitle: "Truncamiento, Selección (Tobit y Heckman)"
+subtitle: "Truncamiento y Selección (Tobit y Heckman)"
 author: "Felipe J. Quezada-Escalona"
 date: "Departamento de Economía"
 output: 
@@ -31,7 +31,7 @@ citeopt <- list(max.names=3, longnamesfirst = FALSE)
 ```
 
 ```{r use-logo, echo=FALSE}
-xaringanExtra::use_logo("https://raw.githubusercontent.com/fquezadae/Impact-of-Environmental-Variability-on-Harvest/088d0bab630a8da78df8a546f30138ba56324573/logo/udec2.png")
+xaringanExtra::use_logo("https://fquezadae.github.io/Slides-Econometria/figs/depto_economia_blanco.png")
 ```
 
 ---
@@ -403,6 +403,7 @@ donde  $\rho$  es la correlación entre los errores de las dos ecuaciones y  $\s
 
 **Nota:**  Siempre es importante entender los supuestos y limitaciones de cada método para seleccionar el más adecuado en contextos prácticos.
 
+
 ---
 
 layout: false
@@ -411,15 +412,25 @@ class: inverse, center, middle
 
 # ¡Muchas gracias!
 
+<span style="color:#f59f18; font-size:1.3em; font-weight:bold;">¿Preguntas?</span>
+
+<div style="margin-top: 50px;"></div>
+
+
 **Felipe J. Quezada-Escalona**  
 
-Department of Economics
+<img src="https://fquezadae.github.io/Slides-Econometria/figs/depto_economia_blanco.png" width="250">
 
-<img src="https://raw.githubusercontent.com/fquezadae/Impact-of-Environmental-Variability-on-Harvest/refs/heads/main/logo/Logo-UdeC-1-mag.png" width="150">
-
-
-<span style="color:#f59f18;">¿Preguntas?</span>
+<a href="https://felipequezada.com" target="_blank" style="
+  font-size:1em;
+  background:linear-gradient(#f59f18);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  text-decoration:none;
+">
+🌐 felipequezada.com
+</a>
 
 ```{r message=FALSE, warning=FALSE, include=FALSE}
-pagedown::chrome_print("09-Datos-Contables.html", output = "09-Datos-Contables.pdf")
+pagedown::chrome_print("11-Modelo-Datos-Truncados.html", output = "11-Modelo-Datos-Truncados.pdf")
 ```
