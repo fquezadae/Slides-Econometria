@@ -1,6 +1,6 @@
 ---
 title: "Modelo de Variable Dependiente Limitada"
-subtitle: "Truncamiento y Selección (Tobit y Heckman)"
+subtitle: "Modelos de Sesgo de Selección"
 author: "Felipe Quezada"
 date: " "
 output: 
@@ -33,14 +33,6 @@ citeopt <- list(max.names=3, longnamesfirst = FALSE)
 ```{r use-logo, echo=FALSE}
 xaringanExtra::use_logo("https://fquezadae.github.io/Slides-Econometria/figs/depto_economia_blanco.png")
 ```
-
-
-layout: false
-
-class: inverse, center, middle
-
-# Censura, Truncamiento y Modelos de Regresión
-
 
 ---
 
