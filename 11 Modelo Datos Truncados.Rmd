@@ -148,12 +148,10 @@ $$\ell(\theta) = \sum_{i=1}^{n} \left\{ \ln f^*(y_i | x_i; \theta) - \ln \left[1
 ---
 # Truncamiento: Normalidad
     
-A menudo se asume que la variable  $y_i^*$  sigue una distribución normal. En este caso, es importante comprender cómo el truncamiento afecta los momentos (media y varianza) de la distribución.
-    
-Supongamos que  $z$  sigue una distribución normal  $N(\mu, \sigma^2)$  y que está truncada por debajo en  $L$.  La función de densidad de la distribución normal truncada es:
-      
+A menudo se asume que la variable  $y_i^*$  sigue una distribución normal. En este caso, es importante comprender cómo el truncamiento afecta los momentos (media y varianza) de la distribución:
+
+- Supongamos que  $z$  sigue una distribución normal  $N(\mu, \sigma^2)$  y que está truncada por debajo en  $L$.  La función de densidad de la distribución normal truncada es: 
 $$ f(z | z \geq L) = \frac{f(z)}{1 - \Phi(\alpha)}, $$
-      
 donde $\alpha = \frac{L - \mu}{\sigma}$ (valor estandarizado del umbral de truncamiento) y $f(z)$ es la densidad normal. $\Phi(\alpha)$ es la función de distribución acumulada normal estándar.
     
     
@@ -208,29 +206,107 @@ La densidad normal truncada tiene forma similar a la densidad normal estándar p
 ---
 # Truncamiento: Momentos normal truncada
 
-## Media:
+## Media
 
-La media de la distribución normal truncada por debajo en  $L$  es: 
+La media de la distribución normal truncada por debajo en $L$ es:
 
-$$E(z | z \geq L) = \mu + \sigma \lambda,$$
+$$
+E(Z \mid Z \geq L) = \mu + \sigma \lambda,
+$$
+donde $\lambda = \dfrac{\phi(\alpha)}{1 - \Phi(\alpha)}$ es la **razón de Mills inversa**, y $\alpha = \dfrac{L - \mu}{\sigma}$ es la posición estandarizada del punto de truncamiento.
 
-donde  $\lambda = \frac{\phi(\alpha)}{1 - \Phi(\alpha)}$  es la **relación de Mills inversa**.
-      
-## Varianza:
+**Intuición:**  
+- Al truncar por debajo, eliminamos los valores bajos de la distribución.  
+- Por tanto, la media se **desplaza hacia la derecha** (aumenta) respecto a $\mu$.  
+- Este desplazamiento está determinado por $\lambda$, que mide cuánto peso “perdimos” en la cola izquierda.  
 
-La varianza de la distribución normal truncada por debajo en  $L$  es: 
-  
-$$V(z | z \geq L) = \sigma^2 (1 - \delta),$$
-  
-donde  $\delta = \lambda (\lambda - \alpha)$  es un factor de ajuste.
+
+En el límite, si $L \to -\infty$, entonces $\Phi(\alpha) \to 0$, $\lambda \to 0$, y recuperamos $E(Z) = \mu$, como debería ser.
 
 ---
 # Truncamiento: Momentos normal truncada
-  
-## Interpretación:
-  
-- La relación de Mills inversa  ($\lambda$)  mide el cambio en la media debido al truncamiento.
-- El factor de ajuste  ($\delta$)  mide el cambio en la varianza debido al truncamiento.
+
+## Media
+
+### ¿Por qué aparece σ en la fórmula?
+
+   $$
+   E(Z \mid Z \geq L) = E(\mu + \sigma X \mid X \geq \alpha)
+   = \mu + \sigma E(X \mid X \geq \alpha)
+   = \mu + \sigma \lambda.
+   $$
+- La **media de la normal truncada no estándar** se obtiene **multiplicando por σ** porque la escala (la dispersión) de la variable original $Z$ es $\sigma$ veces la del estándar $X$
+
+---
+
+# Truncamiento: Momentos normal truncada
+
+## Varianza
+
+La varianza de la distribución normal truncada por debajo en $L$ es:
+
+$$
+V(Z \mid Z \geq L) = \sigma^2 (1 - \delta),
+$$
+
+donde $\delta = \lambda (\lambda - \alpha)$ es un **factor de ajuste**.
+
+**Intuición:**  
+- La truncación elimina parte de la dispersión en la cola inferior.  
+- Por ello, la varianza **disminuye** respecto a la varianza original $\sigma^2$.  
+- El término $\delta$ mide exactamente cuánto se reduce la variabilidad debido al truncamiento.
+
+De nuevo, si no truncamos ($L \to -\infty$), $\lambda \to 0$, $\delta \to 0$, y la varianza vuelve a ser $\sigma^2$.
+
+---
+# Truncamiento: Momentos normal truncada
+
+```{r truncamiento-plot, echo=FALSE, warning=FALSE, message=FALSE, dev="png", dpi=300, fig.width=7, fig.height=5, out.width="75%", fig.align="center"}
+library(ggplot2)
+library(dplyr)
+
+# Parámetros de la normal
+mu <- 0
+sigma <- 1
+
+# Punto de truncamiento (por debajo en L)
+L <- -0.5
+alpha <- (L - mu) / sigma
+phi <- dnorm(alpha)
+Phi <- pnorm(alpha)
+
+# Razón de Mills inversa y momentos truncados
+lambda <- phi / (1 - Phi)
+delta <- lambda * (lambda - alpha)
+
+mean_trunc <- mu + sigma * lambda
+var_trunc <- sigma^2 * (1 - delta)
+sd_trunc <- sqrt(var_trunc)
+
+# Datos para graficar
+z <- seq(-3, 3, length.out = 500)
+dens <- dnorm(z, mu, sigma)
+
+df <- data.frame(z = z, dens = dens)
+
+# Gráfico
+ggplot(df, aes(x = z, y = dens)) +
+  geom_line(size = 1) +
+  geom_area(data = subset(df, z < L), aes(y = dens), fill = "gray80", alpha = 0.6) +
+  geom_vline(xintercept = mu, color = "blue", linetype = "dashed", linewidth = 1) +
+  geom_vline(xintercept = mean_trunc, color = "red", linetype = "dashed", linewidth = 1) +
+  geom_vline(xintercept = L, color = "black", linetype = "dotted", linewidth = 1) +
+  annotate("text", x = mu, y = 0.35, label = "Media original (μ)", color = "blue", vjust = -0.5, size = 3.5) +
+  annotate("text", x = mean_trunc, y = 0.3, label = "Media truncada", color = "red", vjust = -0.5, size = 3.5) +
+  annotate("text", x = L, y = 0.1, label = "L (truncamiento)", color = "black", vjust = -0.5, size = 3.5) +
+  labs(
+    title = "Efecto del truncamiento inferior en una Normal(μ, σ²)",
+    subtitle = paste0("μ = ", mu, ", σ = ", sigma, ", L = ", L),
+    y = "Densidad",
+    x = "z"
+  ) +
+  theme_minimal(base_size = 12)
+```
 
 
 ---
@@ -242,13 +318,53 @@ El modelo de regresión truncada se utiliza cuando la variable dependiente  $y^*
       
 Se asume que la variable latente  $y_i^*$  sigue un modelo lineal: $$y_i^* = x_i'\beta + \epsilon_i, \quad \epsilon_i \sim N(0, \sigma^2)$$
 
+---
+# Truncamiento: Modelo de Regresión Truncada
+  
+El modelo de regresión truncada se utiliza cuando la variable dependiente  $y^*$  está **truncada**, es decir, solo observamos valores de  $y^*$  que caen dentro de un rango determinado.
+
 ## Distribución de $y_i^*$ (condicional al truncamiento)
 
-La función de densidad de  $y_i^*$ , condicional a que  $y_i^* > L$  (truncamiento por debajo), es:
+**Condicional en $x_i$**, la variable $y_i^*$ sigue una distribución normal con media $x_i'\beta$ y varianza $\sigma^2$:
+$$y_i^* \mid x_i \sim N(x_i'\beta, \sigma^2).$$
 
-$$f^*(y_i | x_i; \theta) = \frac{(1/\sigma) \cdot \phi(\alpha)}{1 - \Phi(\alpha)}$$
+Su **función de densidad** es:
 
-donde $\alpha = \frac{L - x_i'\beta}{\sigma}$.
+$$f(y_i^* \mid x_i; \theta) = \frac{1}{\sqrt{2\pi}\sigma}
+\exp\!\left[-\frac{(y^*_i - x_i'\beta)^2}{2\sigma^2}\right]$$
+
+<!-- $$f(y_i^* \mid x_i; \theta) = \frac{1}{\sigma} \, \phi\!\left(\frac{y_i^* - x_i'\beta}{\sigma}\right),$$ -->
+<!-- donde $\phi(\cdot)$ es la densidad de una normal estándar $N(0,1)$. -->
+
+
+<!-- --- -->
+<!-- # Truncamiento: Modelo de Regresión Truncada -->
+
+<!-- ### ¿Por qué aparece $\frac{1}{\sigma}$? -->
+
+<!-- El término $\frac{1}{\sigma}$ proviene de la **regla de cambio de variable** al pasar de la distribución estándar $Z \sim N(0,1)$ a una normal con media y varianza diferentes: -->
+
+<!-- 1. Sea $Z = \frac{y_i^* - \mu}{\sigma}$.   -->
+<!--    Entonces $y_i^* = \mu + \sigma Z$. -->
+
+<!-- 2. La densidad del cambio de variable se obtiene multiplicando por el **Jacobiano** del cambio: -->
+<!--    $$f_Y(y) = f_Z\!\left(\frac{y-\mu}{\sigma}\right) \times \left|\frac{d}{dy}\frac{y-\mu}{\sigma}\right| -->
+<!--    = \phi\!\left(\frac{y-\mu}{\sigma}\right) \cdot \frac{1}{\sigma}.$$ -->
+
+<!-- El factor $\frac{1}{\sigma}$ asegura que la nueva densidad $f_Y(y)$ **integre a 1**, manteniendo la propiedad de probabilidad total: -->
+<!-- $$ -->
+<!-- \int_{-\infty}^{\infty} f_Y(y)\,dy = 1. -->
+<!-- $$ -->
+
+<!-- --- -->
+<!-- # Truncamiento: Modelo de Regresión Truncada -->
+<!-- ### ¿Por qué aparece $\frac{1}{\sigma}$? -->
+
+<!-- **Intuición:**   -->
+<!-- - La función $\phi(\cdot)$ describe la forma “estándar” de la campana.   -->
+<!-- - El parámetro $sigma$ **escala** (ensancha o estrecha) la distribución.   -->
+<!-- - Multiplicar por $\frac{1}{\sigma}$ compensa ese cambio de escala para que el área total bajo la curva siga siendo 1. -->
+
 
 ---
 # Truncamiento: Modelo de Regresión Truncada
@@ -258,12 +374,28 @@ El modelo de regresión truncada se utiliza cuando la variable dependiente  $y^*
 ## Probabilidad acumulada hasta el umbral $L$
 
 $$F^*(L) = \Phi\left(\frac{L - x_i'\beta}{\sigma}\right)$$
+## Densidad truncada completa
 
-## Log-Verosimilitud
+$$f^*(y_i \mid x_i; \beta, \sigma)
+= \frac{\frac{1}{\sqrt{2\pi}\sigma}
+\exp\!\left[-\frac{(y_i - x_i'\beta)^2}{2\sigma^2}\right]}
+{1 - \Phi\!\left(\frac{L - x_i'\beta}{\sigma}\right)}.$$
 
-La función de log-verosimilitud para el modelo de regresión truncada es:
+---
 
-$$\ell(\beta, \sigma^2) = \sum_{i=1}^{n} \left[ -\ln(\sqrt{2\pi}\sigma) - \frac{(y_i - x_i'\beta)^2}{2\sigma^2} - \ln\left(1 - \Phi\left(\frac{L - x_i'\beta}{\sigma}\right)\right) \right]$$
+# Truncamiento: Modelo de Regresión Truncada
+
+## Log-verosimilitud
+
+Al tomar logaritmos y sumar sobre \(i = 1, \ldots, n\), la función de log-verosimilitud para el modelo de regresión truncada es:
+
+$$\ell(\beta, \sigma^2)
+= \sum_{i=1}^n \left[
+-\ln(\sqrt{2\pi}\sigma)
+-\frac{(y_i - x_i'\beta)^2}{2\sigma^2}
+-\ln\!\left(1 - \Phi\!\left(\frac{L - x_i'\beta}{\sigma}\right)\right)
+\right].$$
+
 
 ---
 # Truncamiento: Modelo de Regresión Truncada
