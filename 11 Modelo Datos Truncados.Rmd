@@ -31,7 +31,7 @@ citeopt <- list(max.names=3, longnamesfirst = FALSE)
 ```
 
 ```{r use-logo, echo=FALSE}
-xaringanExtra::use_logo("https://raw.githubusercontent.com/fquezadae/Impact-of-Environmental-Variability-on-Harvest/088d0bab630a8da78df8a546f30138ba56324573/logo/udec2.png")
+xaringanExtra::use_logo("https://fquezadae.github.io/Slides-Econometria/figs/depto_economía blanco.png")
 ```
 
 # Introducción
@@ -433,9 +433,7 @@ class: inverse, center, middle
 
 **Felipe J. Quezada-Escalona**  
 
-Department of Economics
-
-<img src="https://raw.githubusercontent.com/fquezadae/Impact-of-Environmental-Variability-on-Harvest/refs/heads/main/logo/Logo-UdeC-1-mag.png" width="150">
+<img src="https://fquezadae.github.io/Slides-Econometria/figs/depto_economía blanco.png" width="200">
 
 
 <span style="color:#f59f18;">¿Preguntas?</span>
